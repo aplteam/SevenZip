@@ -1,0 +1,30 @@
+ r←Test_0005(stopFlag batchFlag);zipFilename;filename;myZipper;rc;more;found;⎕TRAP;pattern
+ ⍝ Compress a tree into a non-existing file without specifying either extension or type
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ zipFilename←∆OutputPath,'zip_005'
+ pattern←∆InputPath,'*'
+
+⍝ Delete any left overs
+ #.FilesAndDirs.DeleteFile zipFilename,'.zip'
+
+⍝ The test
+ myZipper←⎕NEW ##.SevenZip(,⊂zipFilename)
+ rc←myZipper.Add pattern
+ →GoToTidyUp 0≠3⊃rc
+
+ (rc more)←myZipper.List 0
+ →GoToTidyUp~#.FilesAndDirs.Exists zipFilename,'.zip'
+ →GoToTidyUp rc≠0
+ →GoToTidyUp 9≠⍴more
+
+ (rc more)←myZipper.Unzip ∆TempPath
+ →GoToTidyUp rc≠0
+ found←⊃('recursive' 1)#.FilesAndDirs.Dir ∆TempPath
+ →GoToTidyUp 10≠⍴found
+ r←∆OK
+
+∆TidyUp:
+ {}#.FilesAndDirs.RmDir ∆TempPath
+ #.FilesAndDirs.DeleteFile zipFilename,'.zip'

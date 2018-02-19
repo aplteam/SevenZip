@@ -1,0 +1,2 @@
+﻿The name of this file exists twice within test folder.
+This is the version wich exists in foo

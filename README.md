@@ -1,6 +1,10 @@
-# SevenZip
+# Compressing files from Dyalog APL
+
+
+`SevenZip` is a member of the APLTree library. The library is a collection of classes etc. that aim to support the Dyalog APL programmer. Search GitHub for "apltree" and you will find solutions to many every-day problems Dyalog APL programmers might have to solve.
 
 This class is a wrapper that allows you to use 7zip from within Dyalog APL.
+
 
 ## Warning 
 
@@ -20,6 +24,7 @@ folder2\file.txt
 In other words: relative paths are fine, absolute ones are not.
 
 Since version 1.1.0 the `SevenZip` class issues in hint if this error occurs and absolute path names are used.
+
 
 ## Overview 
 

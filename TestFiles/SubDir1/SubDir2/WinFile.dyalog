@@ -1,4 +1,4 @@
-﻿:Class WinFile
+﻿f:Class WinFile
 ⍝ Provides information about files and directories without using any .NET stuff.
 ⍝ Many methods (Dir+DirX for example) are MUCH faster than the .NET stuff.
 ⍝ The class contains shared methods only.
@@ -13,7 +13,7 @@
 ⍝ ""(#.WinFile.DirX '')[;COL_CreationDateName,COL_LastWriteDate,COL_LastAccessDate-~⎕IO]""
 ⍝ syntax.
 ⍝ Kai Jaeger ⋄ APL Team Ltd
-⍝ Homepage: http://aplwiki.com/WinFile
+⍝ Homepage: http://github.com/aplteam/WinFile
 
     ⎕IO←1 ⋄ ⎕ml←3
 

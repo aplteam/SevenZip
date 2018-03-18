@@ -40,11 +40,13 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←(Last⍕⎕THIS)'2.2.0' '2018-02-19'
+      r←(Last⍕⎕THIS)'2.2.1' '2018-03-18'
     ∇
 
     ∇ History
       :Access Public Shared
+    ⍝ * 2.2.1:
+    ⍝   * Under rare circumstances SevenZip might crash with a VALUE ERROR on `counter`.
     ⍝ * 2.2.0:
     ⍝   * Converted to GitHub from the APL wiki
     ⍝ * 2.1.2:
@@ -152,6 +154,7 @@
     ⍝ including all sub directories are zipped recursively.
     ⍝ `rc` is 0 when okay.
       :Access Public Instance
+      counter←0
       :If 0∊⍴pattern
           rc←0 ⋄ msg←more←''
       :Else

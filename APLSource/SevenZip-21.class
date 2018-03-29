@@ -40,11 +40,13 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←(Last⍕⎕THIS)'2.2.1' '2018-03-18'
+      r←(Last⍕⎕THIS)'2.2.2' '2018-03-29'
     ∇
 
     ∇ History
       :Access Public Shared
+    ⍝ * 2.2.2:
+    ⍝   * Documentation of `List` improved.
     ⍝ * 2.2.1:
     ⍝   * Under rare circumstances SevenZip might crash with a VALUE ERROR on `counter`.
     ⍝ * 2.2.0:
@@ -201,11 +203,13 @@
     ∇
 
     ∇ r←List verboseFlag;cmd;rc;more;exitCode
-    ⍝ Returns information about what is saved in the archive.
-    ⍝
+    ⍝ Returns information about what is saved in the archive.\\
     ⍝ If `verboseFlag` is 1 then the 7zip output is returned which contains all
     ⍝ sorts of pieces of information. If `verboseFlag` is 0 only a vector of file
-    ⍝ names is returned with the names of all files (and sub folders) found in this file.
+    ⍝ names is returned with the names of all files (and sub folders) found in this file.\\
+    ⍝ Note that list has a problem with some characters. `Add` a folder named `∆⍙`
+    ⍝ works fine (and so does `UnZip`) but `List` would return `__` for `∆⍙`. This is
+    ⍝ a 7zip problem.
       :Access Public Instance
       cmd←''
       cmd,←'7z'

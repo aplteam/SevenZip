@@ -40,11 +40,15 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←(Last⍕⎕THIS)'2.2.2' '2018-03-29'
+      r←(Last⍕⎕THIS)'2.2.3.2' '2018-10-04'
     ∇
 
     ∇ History
       :Access Public Shared
+    ⍝ * 2.2.3:
+    ⍝   * In case the 7z.exe cannot be found an appropriate message is assigned to `more`,
+    ⍝     So far it was empty. The return code remains 2 ("File not found") which may
+    ⍝     make the user think that the file to be zipped is not found.
     ⍝ * 2.2.2:
     ⍝   * Documentation of `List` improved.
     ⍝ * 2.2.1:
@@ -65,12 +69,6 @@
     ⍝     by simply trying again, or trace through the code. Should be fine now.
     ⍝ * 2.0.1:
     ⍝   Uses the new version of FilesAndDirs` (syntax change).
-    ⍝ * 2.0.0:
-    ⍝   * Runs on Windows and Linux now. (There is no 7z on Mac OS)
-    ⍝   * `7z` must be on the PATH variable in order to be found. Does not require WinReg
-    ⍝     under Windows anymore as a side effect.
-    ⍝   * Bug fixes:
-    ⍝     * The were problems with filenames containing a space.
     ∇
 
     :Property zipFilename
@@ -185,6 +183,9 @@
               :EndIf
               :If ∨/'The system cannot find the file specified'⍷∊msg
               :OrIf ∨/'Duplicate filename'⍷∊msg
+                  :Leave
+              :ElseIf (0∊≢msg)∧(2=rc)∧¯1=more
+                  more←'Cannot find the 7z exe'
                   :Leave
               :EndIf
               ⎕DL 0.2                               ⍝ Otherwise we are very likely to see all sorts of problems

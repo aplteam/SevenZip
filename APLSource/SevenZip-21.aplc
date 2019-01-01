@@ -49,26 +49,8 @@
     ⍝   * In case the 7z.exe cannot be found an appropriate message is assigned to `more`,
     ⍝     So far it was empty. The return code remains 2 ("File not found") which may
     ⍝     make the user think that the file to be zipped is not found.
-    ⍝ * 2.2.2:
-    ⍝   * Documentation of `List` improved.
-    ⍝ * 2.2.1:
-    ⍝   * Under rare circumstances SevenZip might crash with a VALUE ERROR on `counter`.
-    ⍝ * 2.2.0:
-    ⍝   * Converted to GitHub from the APL wiki
-    ⍝ * 2.1.2:
-    ⍝   * Documentation improved.
-    ⍝   * Better performance in case a file does not exist.
-    ⍝ * 2.1.1:
-    ⍝   * Bug fix: list of types was missing "gz".
-    ⍝ * 2.1.0:
-    ⍝   * New method `History`.
-    ⍝   * `SevenZip` is now managed by acre 3.
-    ⍝ * 2.0.3: `type`...
-    ⍝ * 2.0.2:
-    ⍝   * Finally I got to the bottom of the occasionally failure that disappeared
-    ⍝     by simply trying again, or trace through the code. Should be fine now.
-    ⍝ * 2.0.1:
-    ⍝   Uses the new version of FilesAndDirs` (syntax change).
+    ⍝\\
+    ⍝ For information regarding older versions see <https://github.com/aplteam/SevenZip/releases>
     ∇
 
     :Property zipFilename

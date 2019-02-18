@@ -31,7 +31,7 @@
 ⍝
 ⍝ Author: Kai Jaeger ⋄ APL Team Ltd
 
-    :Include ##.APLTreeUtils
+    :Include APLTreeUtils
 
     ⎕IO←0
     ⎕ML←3
@@ -40,15 +40,13 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←(Last⍕⎕THIS)'2.2.3.4' '2018-10-04'
+      r←(Last⍕⎕THIS)'2.2.4.4' '2019-02-18'
     ∇
 
     ∇ History
       :Access Public Shared
-    ⍝ * 2.2.3:
-    ⍝   * In case the 7z.exe cannot be found an appropriate message is assigned to `more`,
-    ⍝     So far it was empty. The return code remains 2 ("File not found") which may
-    ⍝     make the user think that the file to be zipped is not found.
+    ⍝ * 2.2.4:
+    ⍝   * :Include APLTreeUtils fixed
     ⍝\\
     ⍝ For information regarding older versions see <https://github.com/aplteam/SevenZip/releases>
     ∇

@@ -40,13 +40,13 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←(Last⍕⎕THIS)'2.2.4.4' '2019-02-18'
+      r←(Last⍕⎕THIS)'2.2.5.8' '2019-05-22'
     ∇
 
     ∇ History
       :Access Public Shared
-    ⍝ * 2.2.4:
-    ⍝   * :Include APLTreeUtils fixed
+    ⍝ * 2.2.5:
+    ⍝   * The `zipFilename` property caused, wehn referenced, a Value Error due to a typo.
     ⍝\\
     ⍝ For information regarding older versions see <https://github.com/aplteam/SevenZip/releases>
     ∇
@@ -55,7 +55,7 @@
     :Access Public Instance
     ⍝ The name of the archive the instance is dealing with
         ∇ r←get
-          r←refToUtils.FilesAndDirs.(EnforceBackSlash NormalizePath)zipFilename_
+          r←refToUtils.FilesAndDirs.(EnforceBackslash NormalizePath)zipFilename_
         ∇
     :EndProperty
 

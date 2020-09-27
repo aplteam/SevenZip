@@ -1,3 +1,7 @@
+_**Note that this project is retiered: there will be no new versions (though we are going to keep fixing bugs for a while**_
+
+**Use https://github.com/aplteam/DotNetZip instead**
+
 # Compressing files from Dyalog APL
 
 
@@ -38,8 +42,7 @@ The class makes it very easy to zip as well as unzip stuff.
  * zip
  * gzip
  * bzip2
- * tar
-
+ * ta
 You can either specify an appropriate extension or set the "type" property in order to enforce a certain format.
 
 ```

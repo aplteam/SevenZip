@@ -9,15 +9,15 @@
  list,←⊂∆InputPath,'foo/ExistsTwice.txt'
 
 ⍝ Delete any left overs
- ##.FilesAndDirs.DeleteFile zipFilename
+ FilesAndDirs.DeleteFile zipFilename
 
 ⍝ The test
  myZipper←⎕NEW ##.SevenZip(,⊂zipFilename)
  rc←myZipper.Add list
  →T.GoToTidyUp 0∨.≠3⊃rc
- →T.GoToTidyUp(##.FilesAndDirs.NormalizePath¨list)≢2⊃myZipper.List 0
+ →T.GoToTidyUp(FilesAndDirs.NormalizePath¨list)≢2⊃myZipper.List 0
  ⎕EX'myZipper'
  r←T._OK
 
 ∆TidyUp:
- ##.FilesAndDirs.DeleteFile zipFilename
+ FilesAndDirs.DeleteFile zipFilename

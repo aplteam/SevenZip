@@ -7,24 +7,24 @@
  pattern←∆InputPath,'*'
 
 ⍝ Delete any left overs
- ##.FilesAndDirs.DeleteFile zipFilename,'.tar'
+ FilesAndDirs.DeleteFile zipFilename,'.tar'
 
 ⍝ The test
- myZipper←⎕NEW ##.SevenZip(zipFilename #'tar')
+ myZipper←⎕NEW ##.SevenZip(zipFilename'tar')
  rc←myZipper.Add pattern
  →T.GoToTidyUp 0≠3⊃rc
 
  (rc more)←myZipper.List 0
- →T.GoToTidyUp~##.FilesAndDirs.Exists zipFilename,'.tar'
+ →T.GoToTidyUp~FilesAndDirs.Exists zipFilename,'.tar'
  →T.GoToTidyUp rc≠0
  →T.GoToTidyUp 9≠⍴more
 
  (rc more)←myZipper.Unzip ∆TempPath
  →T.GoToTidyUp rc≠0
- found←⊃('recursive' 1)##.FilesAndDirs.Dir ∆TempPath
+ found←⊃('recursive' 1)FilesAndDirs.Dir ∆TempPath
  →T.GoToTidyUp 10≠⍴found
  r←T._OK
 
 ∆TidyUp:
- {}##.FilesAndDirs.RmDir ∆TempPath
- ##.FilesAndDirs.DeleteFile zipFilename,'.tar'
+ {}FilesAndDirs.RmDir ∆TempPath
+ FilesAndDirs.DeleteFile zipFilename,'.tar'

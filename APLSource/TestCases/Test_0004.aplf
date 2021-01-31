@@ -15,16 +15,16 @@
  →T.GoToTidyUp 0≠3⊃rc
 
  (rc more)←myZipper.List 0
- →T.GoToTidyUp~##.FilesAndDirs.Exists zipFilename
+ →T.GoToTidyUp~FilesAndDirs.Exists zipFilename
  →T.GoToTidyUp rc≠0
- →T.GoToTidyUp(⍴more)≠⍴⊃('recursive' 1)##.FilesAndDirs.Dir pattern
+ →T.GoToTidyUp(⍴more)≠⍴⊃('recursive' 1)FilesAndDirs.Dir pattern
 
  (rc more)←myZipper.Unzip ∆TempPath
  →T.GoToTidyUp rc≠0
- found←⊃('recursive' 1)##.FilesAndDirs.Dir ∆TempPath
+ found←⊃('recursive' 1)FilesAndDirs.Dir ∆TempPath
  →T.GoToTidyUp 10≠⍴found
  r←T._OK
 
 ∆TidyUp:
- {}##.FilesAndDirs.RmDir ∆TempPath
- ##.FilesAndDirs.DeleteFile zipFilename
+ {}FilesAndDirs.RmDir ∆TempPath
+ FilesAndDirs.DeleteFile zipFilename

@@ -7,7 +7,7 @@
  filename←∆InputPath,'ZIP.DWS'
 
 ⍝ Delete any left overs
- ##.FilesAndDirs.DeleteFile zipFilename
+ FilesAndDirs.DeleteFile zipFilename
 
 ⍝ The test
  myZipper←⎕NEW ##.SevenZip(,⊂zipFilename)
@@ -18,5 +18,5 @@
  r←T._OK
 
 ∆TidyUp:
- {}##.FilesAndDirs.RmDir ∆TempPath
- ##.FilesAndDirs.DeleteFile zipFilename
+ {}FilesAndDirs.RmDir ∆TempPath
+ FilesAndDirs.DeleteFile zipFilename

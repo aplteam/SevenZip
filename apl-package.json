@@ -1,0 +1,1 @@
+{  alias: "",  api: "",  assets: "",  date: "2021-01-30",  description: "Zip files with the Open Source tool 7Zip",  group: "aplteam",  name: "SevenZip",  project_url: "https://github.com/aplteam/SevenZip",  source: "",  tags: "aplteam;zip-tools;windows;linux",  version: "4.0.0",}

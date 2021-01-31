@@ -31,8 +31,6 @@
 ⍝
 ⍝ Author: Kai Jaeger ⋄ APL Team Ltd
 
-    :Include APLTreeUtils
-
     ⎕IO←0
     ⎕ML←3
 
@@ -40,13 +38,22 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←(Last⍕⎕THIS)'3.0.0.10' '2020-03-23'
+      r←'SevenZip' '4.0.0.11' '2021-01-30'
     ∇
 
     ∇ History
       :Access Public Shared
-    ⍝ * 3.0.0:
-    ⍝   * BREAKING CHANGE: File extension changed from .DYALOG to .APLC
+    ⍝ * 4.0.0:
+    ⍝   * BREAKING CHANGES:
+    ⍝     * Requires 18.0
+    ⍝     * Constructors do not take `refToUtils` anymore
+    ⍝     * Is a Tatin package now
+    ⍝     * Requires the class APLTreeUtils2
+    ⍝   * Internal changes
+    ⍝     * Does not :Include APLTreeUtils anymore
+    ⍝     * Fully Tatin compatible
+    ⍝     * Test cases polised
+    ⍝     * "Make" polished
     ⍝\\
     ⍝ For information regarding older versions see <https://github.com/aplteam/SevenZip/releases>
     ∇
@@ -55,17 +62,7 @@
     :Access Public Instance
     ⍝ The name of the archive the instance is dealing with
         ∇ r←get
-          r←refToUtils.FilesAndDirs.(EnforceBackslash NormalizePath)zipFilename_
-        ∇
-    :EndProperty
-
-    :Property  refToUtils
-    ⍝ Obsolete and therefore ignored
-    :Access Public
-        ∇ r←get
-          r←refToUtils_
-        ∇
-        ∇ set arg
+          r←F.(EnforceBackslash NormalizePath)zipFilename_
         ∇
     :EndProperty
 
@@ -81,40 +78,32 @@
     ∇ make1(_zipFilename)
       :Access Public
       :Implements Constructor
-      refToUtils_←FindUtils
       type_←''
       Init
     ∇
 
-    ∇ make2(_zipFilename _refToUtils)
+    ∇ make2(_zipFilename _type)
       :Access Public
       :Implements Constructor
-      refToUtils_←FindUtils
-      type_←''
-      Init
-    ∇
-
-    ∇ make3(_zipFilename _refToUtils _type)
-      :Access Public
-      :Implements Constructor
-      refToUtils_←FindUtils
       type_←_type
       Init
     ∇
 
     ∇ Init;filepart;extension
     ⍝ Private but called by all constructors
-      zipFilename_←refToUtils_.FilesAndDirs.NormalizePath _zipFilename
-      :If '.'∊filepart←1⊃refToUtils_.APLTreeUtils.SplitPath zipFilename_
-          :If 0∊⍴type_←CheckExtension Last filepart
+      A←(↑↑⎕CLASS ⎕THIS).##.⍎'APLTreeUtils2'
+      F←(↑↑⎕CLASS ⎕THIS).##.⍎'FilesAndDirs'
+      zipFilename_←F.NormalizePath _zipFilename
+      :If '.'∊filepart←1⊃A.SplitPath zipFilename_
+          :If 0=≢type_←CheckExtension A.Last filepart
               'Invalid extension'⎕SIGNAL 11
           :EndIf
       :Else
-          :If 0∊⍴type_
+          :If 0=≢type_
               zipFilename_,←'.zip'
               type_←'.zip'
           :Else
-              :If 0∊⍴extension←CheckExtension type_
+              :If 0=≢extension←CheckExtension type_
                   'Invalid type'⎕SIGNAL 11
               :EndIf
               zipFilename_,←((~'.'∊type_)/'.'),extension
@@ -135,7 +124,7 @@
     ⍝ `rc` is 0 when okay.
       :Access Public Instance
       counter←0
-      :If 0∊⍴pattern
+      :If 0=≢pattern
           rc←0 ⋄ msg←more←''
       :Else
           cmd←''
@@ -143,14 +132,14 @@
           cmd,←' a '
           cmd,←' -r- '
           cmd,←' -- '
-          cmd,←'"""',(zipFilename_~'"'),'""" '
+          cmd,←'"""',(F.NormalizePath zipFilename_~'"'),'""" '
           :Select ≡pattern
           :CaseList 0 1
-              pattern←refToUtils.FilesAndDirs.NormalizePath pattern~'"'
+              pattern←F.NormalizePath pattern~'"'
               cmd,←'"""',pattern,'"""'
               counter←1
           :Case 2
-              pattern←{refToUtils.FilesAndDirs.NormalizePath ⍵~'"'}¨pattern
+              pattern←{F.NormalizePath ⍵~'"'}¨pattern
               cmd,←⊃,/' ',¨{'"""',⍵,'"""'}¨pattern
           :Else
               'Invalid right argument'⎕SIGNAL 11
@@ -171,10 +160,10 @@
               ⎕DL 0.2                               ⍝ Otherwise we are very likely to see all sorts of problems
           :Until 20<counter←counter+1
           :If 0=rc
-          :AndIf ~0∊⍴msg
+          :AndIf 0≠≢msg
               rc←'Everything is Ok'≢↑¯1↑msg
           :EndIf
-          refToUtils.FilesAndDirs.DeleteFile zipFilename_,'.tmp'
+          F.DeleteFile zipFilename_,'.tmp'
           :If 0≠rc
               :If ∨/'Duplicate filename'∘⍷∊msg
                   msg,←⊂'Use relative path names rather than absolute ones to avoid the problem'
@@ -216,10 +205,10 @@
       cmd,←'7z'
       cmd,←' x '
       cmd,←'"""',(zipFilename_~'"'),'""" '
-      :If ~0∊⍴outputFolder
+      :If 0≠≢outputFolder
           cmd,←' -o',outputFolder,' '
       :EndIf
-      :If ~0∊⍴flags
+      :If 0≠≢flags
           cmd,←' ',flags,' '
       :EndIf
       cmd,←' -aoa '         ⍝ Overwrite mode
@@ -249,19 +238,15 @@
       }
 
     ∇ r←Run_7zip cmd
-      :Select GetOperatingSystem ⍬
+      :Select A.GetOperatingSystem ⍬
       :Case 'Win'
-          r←refToUtils.Execute.Process cmd
+          r←((↑↑⎕CLASS ⎕THIS).##.⍎'Execute').Process cmd
       :Case 'Lin'
-          r←refToUtils.OS.ShellExecute cmd
+          r←((↑↑⎕CLASS ⎕THIS).##.⍎'OS').ShellExecute cmd
           r←r[0 2],0
       :Case 'Mac'
           . ⍝ Not supported I am afraid
       :EndSelect
-    ∇
-
-    ∇ r←FindUtils
-      r←FindPathTo↑⎕THIS
     ∇
 
 :EndClass

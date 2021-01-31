@@ -7,7 +7,7 @@
  list←∆InputPath,'ZIP.DWS'
 
 ⍝ Delete any left overs
- ##.FilesAndDirs.DeleteFile zipFilename
+ FilesAndDirs.DeleteFile zipFilename
 
 ⍝ The test
  myZipper←⎕NEW ##.SevenZip(,⊂zipFilename)
@@ -17,14 +17,14 @@
  (rc more)←myZipper.List 0
  →T.GoToTidyUp rc≠0
  →T.GoToTidyUp 1≠⍴more
- →T.GoToTidyUp~##.FilesAndDirs.Exists zipFilename
+ →T.GoToTidyUp~FilesAndDirs.Exists zipFilename
 
  (rc more)←myZipper.Unzip ∆TempPath
  →T.GoToTidyUp rc≠0
- found←'recursive'##.FilesAndDirs.ListDirs ∆TempPath
+ found←'recursive'FilesAndDirs.ListDirs ∆TempPath
  →T.GoToTidyUp(+/∆InputPath∊'\/')≠⍴found
  r←T._OK
 
 ∆TidyUp:
- {}##.FilesAndDirs.RmDir ∆TempPath
- ##.FilesAndDirs.DeleteFile zipFilename
+ {}FilesAndDirs.RmDir ∆TempPath
+ FilesAndDirs.DeleteFile zipFilename

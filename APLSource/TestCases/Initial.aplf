@@ -1,10 +1,10 @@
  Initial;rc;home
- ##.FilesAndDirs.PolishCurrentDir
- home←##.FilesAndDirs.GetTempPath,'SevenZip_TestCases\'
- ∆InputPath←##.FilesAndDirs.NormalizePath'TestFiles\'
- ∆OutputPath←##.FilesAndDirs.NormalizePath home,'TestOutput\'
- ∆TempPath←##.FilesAndDirs.NormalizePath home,'temp\'
+ FilesAndDirs.PolishCurrentDir
+ home←FilesAndDirs.GetTempPath,'SevenZip_TestCases\'
+ ∆InputPath←FilesAndDirs.NormalizePath'TestFiles\'
+ ∆OutputPath←FilesAndDirs.NormalizePath home,'TestOutput\'
+ ∆TempPath←FilesAndDirs.NormalizePath home,'temp\'
  Cleanup
 
- 'Create!'##.FilesAndDirs.CheckPath ∆OutputPath
- 'Create!'##.FilesAndDirs.CheckPath ∆TempPath
+ 'Create!'FilesAndDirs.CheckPath ∆OutputPath
+ 'Create!'FilesAndDirs.CheckPath ∆TempPath

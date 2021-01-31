@@ -7,11 +7,11 @@
  list←∆InputPath,'*'
 
 ⍝ Delete any left overs
- ##.FilesAndDirs.DeleteFile zipFilename
+ FilesAndDirs.DeleteFile zipFilename
 
 ⍝ The test
  :Trap 11
-     myZipper←⎕NEW ##.SevenZip(zipFilename #'abc')
+     myZipper←⎕NEW ##.SevenZip(zipFilename'abc')
      →T.FailsIf 1
  :Else
      →T.FailsIf'Invalid type'≢1⊃⎕DM

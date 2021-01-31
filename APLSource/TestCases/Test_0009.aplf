@@ -7,7 +7,7 @@
  list←∆InputPath,'*'
 
 ⍝ Delete any left overs
- ##.FilesAndDirs.DeleteFile zipFilename
+ FilesAndDirs.DeleteFile zipFilename
 
 ⍝ The test
  :Trap 11

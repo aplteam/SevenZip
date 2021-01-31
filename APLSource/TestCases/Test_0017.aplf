@@ -4,28 +4,28 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  tempPath←∆OutputPath,'..\Testcase_0017\∆⍙'
- 'Create!'##.FilesAndDirs.CheckPath tempPath
- ##.APLTreeUtils.WriteUtf8File(tempPath,'\∆⍙1')'First test file'
- ##.APLTreeUtils.WriteUtf8File(tempPath,'\∆⍙2')'Second test file'
+ 'Create!'FilesAndDirs.CheckPath tempPath
+ (⊂'First test file')FilesAndDirs.NPUT tempPath,'\∆⍙1'
+ (⊂'Second test file')FilesAndDirs.NPUT(tempPath,'\∆⍙2')
 
  zipFilename←∆OutputPath,'zip_001.zip'
 ⍝ Delete any left overs
- ##.FilesAndDirs.DeleteFile zipFilename
+ FilesAndDirs.DeleteFile zipFilename
 
 ⍝ The test
  myZipper←⎕NEW ##.SevenZip(,⊂zipFilename)
  rc←myZipper.Add tempPath
  →T.GoToTidyUp 0≠⊃rc
- {}##.FilesAndDirs.RmDir tempPath
+ {}FilesAndDirs.RmDir tempPath
  ⎕DL 0.1
- →T.GoToTidyUp ##.FilesAndDirs.IsDir tempPath
+ →T.GoToTidyUp FilesAndDirs.IsDir tempPath
  rc←myZipper.Unzip tempPath
  ⍝ Note that `List` would return `__` for `∆⍙` at this point. This is a 7zip problem!
  →T.GoToTidyUp 0≠⊃rc
- →T.GoToTidyUp'∆⍙1' '∆⍙2'≢{⊃,/1↓⎕NPARTS ⍵}¨⊃##.FilesAndDirs.Dir tempPath,'\∆⍙\*'
+ →T.GoToTidyUp'∆⍙1' '∆⍙2'≢{⊃,/1↓⎕NPARTS ⍵}¨⊃FilesAndDirs.Dir tempPath,'\∆⍙\*'
 
  r←T._OK
 
 ∆TidyUp:
- {}##.FilesAndDirs.RmDir¨∆TempPath tempPath
- ##.FilesAndDirs.DeleteFile zipFilename
+ {}FilesAndDirs.RmDir¨∆TempPath tempPath
+ FilesAndDirs.DeleteFile zipFilename

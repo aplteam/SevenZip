@@ -21,8 +21,8 @@
 
  (rc more)←myZipper.Unzip ∆TempPath
  →T.GoToTidyUp rc≠0
- found←'recursive'FilesAndDirs.ListDirs ∆TempPath
- →T.GoToTidyUp(+/∆InputPath∊'\/')≠⍴found
+ found←⊃('recursive' 1)FilesAndDirs.Dir ∆TempPath
+ →T.GoToTidyUp≠/≢¨found (⊆list)
  r←T._OK
 
 ∆TidyUp:

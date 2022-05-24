@@ -13,7 +13,7 @@
  myZipper←⎕NEW ##.SevenZip(,⊂zipFilename)
  rc←myZipper.Add filename
  →T.GoToTidyUp 0≠⊃rc
- →T.GoToTidyUp zipFilename≢myZipper.zipFilename
+ →T.GoToTidyUp≢/FilesAndDirs.NormalizePath¨zipFilename myZipper.zipFilename
 
  r←T._OK
 

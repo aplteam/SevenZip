@@ -1,4 +1,4 @@
- r←Test_0003(stopFlag batchFlag);zipFilename;filename;myZipper;rc;more;found;⎕TRAP;pattern
+ r←Test_0003(stopFlag batchFlag);zipFilename;filename;myZipper;rc;more;found;⎕TRAP;pattern;found2
  ⍝ Compress a tree into a non-existing file.
  r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
@@ -22,7 +22,8 @@
  (rc more)←myZipper.Unzip ∆TempPath
  →T.GoToTidyUp rc≠0
  found←⊃('recursive' 1)FilesAndDirs.Dir ∆TempPath
- →T.GoToTidyUp 10≠⍴found
+ found2←⊃('recursive' 1)FilesAndDirs.Dir ∆InputPath
+ →T.GoToTidyUp≠/≢¨found found2
  r←T._OK
 
 ∆TidyUp:

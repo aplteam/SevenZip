@@ -3,7 +3,7 @@
  r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
- was←FilesAndDirs.Cd ¯1↓##.CiderConfig.HOME
+ was←FilesAndDirs.Cd ##.CiderConfig.HOME
 
  zipFilename←∆OutputPath,'zip_011'
  list←''

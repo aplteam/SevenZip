@@ -4,8 +4,7 @@
 ⍝ This class is supported under Linux and Windows but not Mac OS because 7zip is not available on the Mac.\\
 ⍝ Note that the file extension **must** be lowercase!\\
 ⍝ If `type` is not specified then the extension of the filename rules the day.\\
-⍝ Note also that 7-zip suffers from a bug: that these two files cannot go into the same zip file:
-⍝
+⍝ Note also that 7-zip suffers from a bug: that these two files cannot go into the same zip file:\\
 ⍝ ~~~
 ⍝ C:\My\folder2\foo
 ⍝ C:\My\folder1\foo
@@ -15,8 +14,7 @@
 ⍝ folder2\foo
 ⍝ folder1\foo
 ⍝ ~~~
-⍝ would actually work when the current directory is `C:\My`. Well...
-⍝
+⍝ would actually work when the current directory is `C:\My`. Well...\\
 ⍝ ## Examples
 ⍝ ~~~
 ⍝       myZipper←⎕new #.SevenZip (,⊂'MyZipFile')
@@ -27,9 +25,8 @@
 ⍝ foo.txt
 ⍝       myZipper.Unzip 'c:\output\'
 ⍝ ~~~
-⍝ Homepage: <http://http://aplwiki.com/SevenZip>
-⍝
-⍝ Author: Kai Jaeger ⋄ APL Team Ltd
+⍝ Homepage: <http://http://aplwiki.com/SevenZip>\\
+⍝ Author: Kai Jaeger 
 
     ⎕IO←0
     ⎕ML←3
@@ -38,11 +35,13 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←'SevenZip' '4.0.0+13' '2021-01-30'
+      r←'SevenZip' '4.0.1+13' '2023-06-12'
     ∇
 
     ∇ History
       :Access Public Shared
+    ⍝ * 4.0.1 ⋄ 2023-06-12
+    ⍝   * Version 4.0.0 had a poblem with the package config file
     ⍝ * 4.0.0:
     ⍝   * BREAKING CHANGES:
     ⍝     * Requires 18.0

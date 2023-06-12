@@ -19,7 +19,7 @@ C:\My\folder1\file.txt
 C:\My\folder2\file.txt
 ```
 
-This is a clearly a bug. However, you can easily get around this by executing the command within `C:\My` and this list of files:
+This is clearly a bug. However, you can easily get around this by executing the command within `C:\My` and this list of files:
 ```
 folder1\file.txt
 folder2\file.txt

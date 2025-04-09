@@ -1,4 +1,4 @@
-_**Note that this project is retiered: there will be no new versions (though we are going to keep fixing bugs for a while**_
+_**Note that this project is retired: there will be no new versions (though we are going to keep fixing bugs for a while**_
 
 **Use https://github.com/aplteam/DotNetZip instead**
 

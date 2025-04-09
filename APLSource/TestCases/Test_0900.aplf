@@ -1,0 +1,11 @@
+ r←Test_0900(stopFlag batchFlag);⎕TRAP;version
+ ⍝ Exercise the "Version" function
+ r←T._Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ version←##.SevenZip.Version
+ →T.PassesIf 1=≡version
+ →T.PassesIf' '=1↑0⍴version
+ →T.PassesIf∧/⎕D∊⍨{⍵↑⍨¯1+⌊/⍵⍳'-+'}version~' .'
+
+ r←T._OK

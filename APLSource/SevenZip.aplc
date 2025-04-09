@@ -26,7 +26,7 @@
 ⍝       myZipper.Unzip 'c:\output\'
 ⍝ ~~~
 ⍝ Homepage: <http://http://aplwiki.com/SevenZip>\\
-⍝ Author: Kai Jaeger 
+⍝ Author: Kai Jaeger
 
     ⎕IO←0
     ⎕ML←3
@@ -34,12 +34,26 @@
     :Field Public Shared types←'7z' 'split' 'zip' 'gzip' 'bzip2' 'tar' 'gz'
 
     ∇ r←Version
+    ⍝ Returns the version number from `TatinVars` if possible.
+    ⍝ See also `History`
       :Access Public Shared
-      r←'SevenZip' '4.0.1+13' '2023-06-12'
+      :If 0<⎕NC'TatinVars.CONFIG'
+          r←(⎕JSON⍠('Dialect' 'JSON5')⊢TatinVars.CONFIG).version
+      :ElseIf 0<##.⎕NC'TatinVars.CONFIG'
+          r←(⎕JSON⍠('Dialect' 'JSON5')⊢##.TatinVars.CONFIG).version
+      :Else
+    ⍝ When a script was not loaded with Tatin, there will be no namespace `TatinVars`.
+    ⍝ In such cases we cannot provide a version number, so we return just ''.
+          r←''
+      :EndIf
     ∇
 
     ∇ History
       :Access Public Shared
+    ⍝ * 5.0.0 ⋄ 2025-04-09
+    ⍝   * Potentially breaking: `Version` now returns a char vector
+    ⍝   * Packages updated
+    ⍝   * "Make" improved
     ⍝ * 4.0.1 ⋄ 2023-06-12
     ⍝   * Version 4.0.0 had a poblem with the package config file
     ⍝ * 4.0.0:

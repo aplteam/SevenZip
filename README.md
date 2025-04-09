@@ -4,9 +4,6 @@ _**Note that this project is retiered: there will be no new versions (though we 
 
 # Compressing files from Dyalog APL
 
-
-`SevenZip` is a member of the APLTree library. The library is a collection of classes etc. that aim to support the Dyalog APL programmer. Search GitHub for "apltree" and you will find solutions to many every-day problems Dyalog APL programmers might have to solve.
-
 This class is a wrapper that allows you to use 7zip from within Dyalog APL.
 
 
@@ -25,7 +22,7 @@ folder1\file.txt
 folder2\file.txt
 ```
 
-In other words: relative paths are fine, absolute ones are not.
+In other words, relative paths are fine, but absolute ones are not.
 
 Since version 1.1.0 the `SevenZip` class issues in hint if this error occurs and absolute path names are used.
 
@@ -34,16 +31,16 @@ Since version 1.1.0 the `SevenZip` class issues in hint if this error occurs and
 
 The class "SevenZip" relies on an installed version of the Open Source zipper [7zip](http://www.7-zip.org/).
 
-The class makes it very easy to zip as well as unzip stuff.
+The class makes it very easy to zip and unzip stuff.
 
-"SevenZip" suppports the following formats:
+"SevenZip" supports the following formats:
  * 7z
  * split
  * zip
  * gzip
  * bzip2
  * ta
-You can either specify an appropriate extension or set the "type" property in order to enforce a certain format.
+You can either specify an appropriate extension or set the "type" property in order to enforce a particular format.
 
 ```
       myZipper←⎕new #.SevenZip (,⊂'MyZipFile')

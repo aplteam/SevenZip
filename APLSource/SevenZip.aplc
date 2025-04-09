@@ -32,6 +32,7 @@
     ⎕ML←3
 
     :Field Public Shared types←'7z' 'split' 'zip' 'gzip' 'bzip2' 'tar' 'gz'
+    :Field Public Shared EXE←'7z'  ⍝ This works when 7z is on the PATH variable; you might need to assign a path to the EXE instead
 
     ∇ r←Version
     ⍝ Returns the version number from `TatinVars` if possible.
@@ -52,6 +53,7 @@
       :Access Public Shared
     ⍝ * 5.0.0 ⋄ 2025-04-09
     ⍝   * Potentially breaking: `Version` now returns a char vector
+    ⍝   * Field `EXE` introduced that allows setting a full path to the 7z EXE
     ⍝   * Packages updated
     ⍝   * "Make" improved
     ⍝ * 4.0.1 ⋄ 2023-06-12
@@ -140,8 +142,7 @@
       :If 0=≢pattern
           rc←0 ⋄ msg←more←''
       :Else
-          cmd←''
-          cmd,←'7z '
+          cmd←EXE
           cmd,←' a '
           cmd,←' -r- '
           cmd,←' -- '
@@ -167,7 +168,7 @@
               :OrIf ∨/'Duplicate filename'⍷∊msg
                   :Leave
               :ElseIf (0∊≢msg)∧(2=rc)∧¯1=more
-                  more←'Cannot find the 7z exe'
+                  more←'Cannot find the 7z executable'
                   :Leave
               :EndIf
               ⎕DL 0.2                               ⍝ Otherwise we are very likely to see all sorts of problems
@@ -194,8 +195,7 @@
     ⍝ works fine (and so does `UnZip`) but `List` would return `__` for `∆⍙`. This is
     ⍝ a 7zip problem.
       :Access Public Instance
-      cmd←''
-      cmd,←'7z'
+      cmd←EXE
       cmd,←' l '
       cmd,←'"""',(zipFilename_~'"'),'""" '
       (rc more exitCode)←Run_7zip cmd
@@ -214,8 +214,7 @@
     ⍝ Use the left argument for adding more flags. You should know what you are doing then however.
       :Access Public Instance
       flags←{0<⎕NC ⍵:⍎⍵ ⋄ ''}'flags'
-      cmd←''
-      cmd,←'7z'
+      cmd←EXE
       cmd,←' x '
       cmd,←'"""',(zipFilename_~'"'),'""" '
       :If 0≠≢outputFolder

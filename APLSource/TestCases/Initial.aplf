@@ -3,6 +3,7 @@
  ∆InputPath←##.CiderConfig.HOME,'/TestFiles/'
  ∆OutputPath← home,'TestOutput/'
  ∆TempPath←FilesAndDirs.NormalizePath home,'temp/'
+ ##.SevenZip.EXE←'C:\Program Files\7-Zip\7z.exe'
  Cleanup
 
  'Create!'FilesAndDirs.CheckPath ∆OutputPath

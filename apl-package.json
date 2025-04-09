@@ -19,5 +19,5 @@
   source: "APLSource/SevenZip.aplc",
   tags: "zip-tools",
   userCommandScript: "",
-  version: "4.0.1+18",
+  version: "5.0.0+20",
 }
